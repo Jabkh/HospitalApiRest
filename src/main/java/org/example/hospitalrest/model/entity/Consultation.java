@@ -1,30 +1,43 @@
 package org.example.hospitalrest.model.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Temporal(TemporalType.DATE)
     private Date dateOfConsultation;
+
     private String doctorName;
     private String advice;
     private String treatmentSheet;
 
     @ManyToOne
+    @JoinColumn(name = "id_patient")
     private Patient patient;
 
-    public Patient getPatient() {
-        return patient;
-    }
+    // Relation ManyToMany avec CareSheet
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "consultation_care_sheets",
+            joinColumns = @JoinColumn(name = "consultation_id"),
+            inverseJoinColumns = @JoinColumn(name = "care_sheet_id"))
+    private List<CareSheet> careSheets;
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
+    // Relation ManyToMany avec Prescription
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "consultation_prescriptions",
+            joinColumns = @JoinColumn(name = "consultation_id"),
+            inverseJoinColumns = @JoinColumn(name = "prescription_id"))
+    private List<Prescription> prescriptions;
+
+    // Constructeurs, getters, setters, toString()
 
     public Consultation() {}
 
@@ -68,12 +81,36 @@ public class Consultation {
         this.advice = advice;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
     public String getTreatmentSheet() {
         return treatmentSheet;
     }
 
     public void setTreatmentSheet(String treatmentSheet) {
         this.treatmentSheet = treatmentSheet;
+    }
+
+    public List<CareSheet> getCareSheets() {
+        return careSheets;
+    }
+
+    public void setCareSheets(List<CareSheet> careSheets) {
+        this.careSheets = careSheets;
+    }
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
     }
 
     @Override

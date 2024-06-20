@@ -5,14 +5,22 @@
 
 <hibernate-configuration>
     <session-factory>
+        <!-- Configuration de la connexion à la base de données -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/HospitalRest</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">Mysql</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="show_sql">true</property>
+
+        <!-- Options de configuration Hibernate -->
+        <property name="hibernate.hbm2ddl.auto">update</property> <!-- Options possibles : update, validate, create, create-drop -->
+        <property name="hibernate.show_sql">true</property> <!-- Afficher les requêtes SQL dans la console -->
+
+        <!-- Mapping des classes entités -->
         <mapping class="org.example.hospitalrest.model.entity.Patient"/>
         <mapping class="org.example.hospitalrest.model.entity.Consultation"/>
+        <mapping class="org.example.hospitalrest.model.entity.Treatment"/>
+        <mapping class="org.example.hospitalrest.model.entity.CareSheet"/>
+        <mapping class="org.example.hospitalrest.model.entity.Prescription"/>
     </session-factory>
 </hibernate-configuration>

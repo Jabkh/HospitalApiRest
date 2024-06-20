@@ -1,7 +1,6 @@
 package org.example.hospitalrest.model.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -10,14 +9,31 @@ import java.util.List;
 public abstract class Treatment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Temporal(TemporalType.DATE)
     private Date startDate;
-    @Temporal(TemporalType.DATE)
     private LocalDate endDate;
 
-    @ManyToMany(mappedBy = "treatments")
+    @ManyToMany
     private List<Consultation> consultations;
+
+    // Getters et setters pour startDate et endDate
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 
     public List<Consultation> getConsultations() {
         return consultations;
@@ -26,5 +42,4 @@ public abstract class Treatment {
     public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
     }
-
 }
