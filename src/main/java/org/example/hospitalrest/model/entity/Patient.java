@@ -16,7 +16,7 @@ public class Patient {
     private Date dateOfBirth;
     private String imgUrl;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient",fetch = FetchType.EAGER)
     private List<Consultation> consultations;
 
     public List<Consultation> getConsultations() {
