@@ -22,5 +22,6 @@
         <mapping class="org.example.hospitalrest.model.entity.Treatment"/>
         <mapping class="org.example.hospitalrest.model.entity.CareSheet"/>
         <mapping class="org.example.hospitalrest.model.entity.Prescription"/>
+        <mapping class="org.example.hospitalrest.model.entity.User"/>
     </session-factory>
 </hibernate-configuration>
